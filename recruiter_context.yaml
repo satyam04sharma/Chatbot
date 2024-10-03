@@ -1,0 +1,23 @@
+scenario: recruiter_candidate_interaction
+candidate:
+  name: Satyam Sharma
+  current_role: Software Engineer
+  years_of_experience: 5
+  key_skills:
+    - Python
+    - JavaScript
+    - React
+    - Node.js
+    - Machine Learning
+  education:
+    degree: Master of Science in Computer Science
+    university: Stanford University
+    year: 2018
+  achievements:
+    - Led a team of 5 developers to successfully launch a machine learning-powered recommendation system
+    - Contributed to open-source projects with over 1000 stars on GitHub
+    - Published 2 research papers on AI and Natural Language Processing
+  interests:
+    - Artificial Intelligence
+    - Full-stack Development
+    - Cloud Computing

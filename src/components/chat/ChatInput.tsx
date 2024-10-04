@@ -10,8 +10,8 @@ interface ChatInputProps {
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({ searchQuery, setSearchQuery, handleSearch, isLoading, suggestions }) => {
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && searchQuery.trim() && !isLoading) {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && searchQuery.trim() && !isLoading) {
       handleSearch();
     }
   };
@@ -25,7 +25,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ searchQuery, setSearchQuery, hand
         placeholder="Continue the conversation..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyDown}
         className="w-full py-3 pl-12 pr-4 text-zinc-300 bg-zinc-800 border-2 border-zinc-600 rounded-full focus:outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-400 focus:ring-opacity-50 transition-all duration-300 ease-in-out placeholder-zinc-500"
         disabled={isLoading}
       />

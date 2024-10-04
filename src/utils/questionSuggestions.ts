@@ -17,15 +17,15 @@ ${JSON.stringify(resume, null, 2)}
 Previous Conversation:
 ${conversationHistory.map(msg => `${msg.type === 'user' ? 'Recruiter' : 'Candidate'}: ${msg.content}`).join('\n')}
 
-Provide 3 short, context-specific questions in a numbered list. Each question should be no longer than 10 words.`;
+Provide 3 short, context-specific questions in a numbered list. Each question should be no longer than 15 words and should be formatted in Markdown.`;
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
-      max_tokens: 150,
+      max_tokens: parseInt(process.env.SUGGESTION_MAX_TOKENS || "200"),
       n: 1,
-      temperature: 0.7,
+      temperature: parseFloat(process.env.SUGGESTION_TEMPERATURE || "0.7"),
     });
 
     const suggestionsText = completion.choices[0].message.content || '';

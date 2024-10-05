@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_MODEL=${OPENAI_MODEL}
       - MAX_TOKENS=${MAX_TOKENS}
@@ -16,10 +16,23 @@ services:
       - REDIS_URL=redis://redis:6379
     volumes:
       - ./recruiter_context.yaml:/app/recruiter_context.yaml
+      - ./.env:/app/.env
+      - ./src:/app/src
+    command: npm run dev
     depends_on:
       - redis
+    networks:
+      - app-network
+    dns:
+      - 8.8.8.8  # Add this line to use Google's DNS server
 
   redis:
     image: redis:alpine
     ports:
-      - "6379:6379"
+      - "6380:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

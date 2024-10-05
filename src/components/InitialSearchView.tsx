@@ -93,10 +93,13 @@ const InitialSearchView: React.FC<InitialSearchViewProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <span className="font-bold text-zinc-300">Unlock the power of AI-driven career matching!</span> Curious about Satyam Sharma's fit for your role? Wondering about his resume match percentage? 
+        <span className="font-bold text-zinc-300">Unlock the power of AI-driven career matching!</span> Curious about Satyam Sharma&apos;s fit for your role? Wondering about his resume match percentage? 
         <span className="italic"> Simply ask, and watch as the future of recruitment unfolds before your eyes.</span> 
         <span className="block mt-2 text-zinc-500">🚀 Welcome to the next generation of talent discovery.</span>
       </motion.p>
+      <p className="mb-4">
+        Don&apos;t worry if you&apos;re not sure what to ask - I&apos;m here to help!
+      </p>
     </motion.div>
   )
 }

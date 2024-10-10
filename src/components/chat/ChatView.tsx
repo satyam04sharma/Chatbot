@@ -60,8 +60,8 @@ const ChatView: React.FC<ChatViewProps> = ({
       <div className="mt-auto">
         {!isLoading && suggestions.length > 0 && (
           <div className="mb-4 px-4">
-            <p className="text-zinc-400 mb-2 text-sm">Ask me about...</p>
-            <div className="flex flex-wrap gap-2">
+            <p className="text-zinc-400 mb-2 text-sm">Suggested Questions:</p>
+            <div className="flex flex-col space-y-2">
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}

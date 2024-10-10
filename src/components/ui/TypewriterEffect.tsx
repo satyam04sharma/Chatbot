@@ -3,10 +3,10 @@ import ReactMarkdown from 'react-markdown';
 
 interface TypewriterEffectProps {
   content: string;
-  speed?: number;
+  speed?: number; // Speed in milliseconds
 }
 
-const TypewriterEffect: React.FC<TypewriterEffectProps> = ({ content, speed = 30 }) => {
+const TypewriterEffect: React.FC<TypewriterEffectProps> = ({ content, speed = 15 }) => { // Decrease the default speed for faster typing
   const [displayedContent, setDisplayedContent] = useState('');
 
   useEffect(() => {

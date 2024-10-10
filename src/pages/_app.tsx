@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>AI Recruiter&apos;s Assistant</title>
+        <title>Recruiter's Assistant</title>
         <meta name="description" content="An AI-powered interactive portfolio for Satyam Sharma" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

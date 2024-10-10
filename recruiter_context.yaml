@@ -1,23 +1,174 @@
-scenario: recruiter_candidate_interaction
 candidate:
   name: Satyam Sharma
-  current_role: Software Engineer
-  years_of_experience: 5
-  key_skills:
-    - Python
-    - JavaScript
-    - React
-    - Node.js
-    - Machine Learning
+  contact:
+    phone: 562-832-5330
+    email: satyam04sharma@gmail.com
+    linkedin: linkedin.com/in/satyam-sharma
+    website: SatyamSharma.com
+    github: github.com/satyam04sharma
+    youtube: youtube.com/@SatyamSlaysCode
+  summary: Experienced Full Stack Developer with over 5 years of expertise in designing and developing innovative solutions using React, Node.js, Java, and modern frameworks. Proficient in building microservices, implementing Docker for containerization, and utilizing AWS services. Strong background in developing scalable applications, real-time data processing, and API development. Adept at collaborating with cross-functional teams to deliver robust software solutions.
   education:
-    degree: Master of Science in Computer Science
-    university: Stanford University
-    year: 2018
+    - degree: Master of Science in Computer Science
+      university: California State University - Long Beach
+      location: Long Beach, CA
+      period: Jan 2023 – Dec 2024
+      gpa: 3.56/4.0
+    - degree: Bachelor of Technology in Computer Science
+      university: SRM Institute of Science and Technology
+      location: Chennai, India
+      period: May 2015 – May 2019
+  certifications:
+    - name: "Microsoft Certified: Azure Fundamentals"
+      issued: Jan 2022
+      credential_id: 992597243
+    - name: "The Data Science Course 2021"
+      provider: Career 365
+  skills:
+    languages:
+      - JavaScript (ES6+)
+      - Java
+      - Python
+      - Go
+      - SQL
+      - HTML5
+      - CSS3
+      - SCSS
+      - SASS
+    frontend_development:
+      - React.js
+      - Next.js
+      - Angular
+      - jQuery
+      - Tailwind CSS
+      - Bootstrap
+      - D3.js
+      - Redux
+      - Jotai
+      - React Context API
+    backend_development:
+      - Java Spring
+      - Node.js
+      - Express.js
+      - Django
+      - Flask
+      - FastAPI
+      - Golang
+    databases:
+      - MySQL
+      - PostgreSQL
+      - MongoDB
+      - Redis
+    devops_and_cloud:
+      - Docker
+      - Kubernetes
+      - AWS (EC2, S3, Lambda, RDS, CloudFormation)
+      - Jenkins
+      - GitHub Actions
+      - GitLab CI/CD
+    testing_and_automation:
+      - Jest
+      - Enzyme
+      - React Testing Library
+      - PyTest
+      - Postman
+      - Swagger
+      - Webpack
+      - Babel
+      - Gulp
+      - Vite
+    data_processing_and_ml:
+      - Pandas
+      - NumPy
+      - TensorFlow
+      - PyTorch
+      - Elasticsearch
+      - Kibana
+      - Logstash
+    other_technologies:
+      - WebSockets
+      - Axios
+      - Celery
+      - DTOs
+      - Annotations
+      - Lombok
+      - Async/Await
+      - MVC Pattern
+      - Design Patterns
+  experience:
+    - role: Full Stack Developer
+      company: Associated Student Union
+      location: Long Beach, CA
+      period: Aug 2023 – Present
+      responsibilities:
+        - Engineered a complete overhaul for a student-run radio station’s website utilizing React.js, TypeScript, and Jotai, which led to a 20% increase in user traffic.
+        - Launched the 22WestMedia.com web application leveraging JavaScript, Tailwind CSS, SCSS, and Figma Wireframes to design a responsive, visually engaging user interface.
+        - Led regular code review sessions focused on improving web application accessibility and mobile-first design.
+        - Developed GitHub Actions workflows for continuous integration, accelerating deployment by 70%.
+    - role: Software Engineer
+      company: WelSpot, Inc
+      location: Miami, FL
+      period: May 2023 – Aug 2023
+      responsibilities:
+        - Enhanced the Metronic User dashboard by integrating GraphQL for real-time data fetching.
+        - Amplified user experience by implementing Server.io, Redux, Pub-sub, REST APIs.
+        - Developed a loan processing and OAuth-based service within a Node.js-powered microservices architecture.
+    - role: Full Stack Developer
+      company: EXL Services
+      location: Remote
+      period: Aug 2022 – Dec 2022
+      responsibilities:
+        - Led the migration of legacy jQuery applications to modern React-based SPAs.
+        - Developed backend APIs using FastAPI and Flask.
+        - Implemented task queues with Celery and Redis.
+        - Performed rigorous API testing using Postman and PyTest.
+    - role: Full Stack Developer
+      company: Tata Consultancy Services (TCS)
+      location: Noida, India
+      period: Jun 2019 – Aug 2022
+      responsibilities:
+        - Spearheaded the creation of POCs leading to successful project bids.
+        - Pioneered a real-time document processing dashboard using React Hooks.
+        - Transformed legacy jQuery apps into SPAs using React.
+        - Developed an AJAX-based interactive data filtering and visualization portal.
+  projects:
+    - name: "Building Redis in Go"
+      date: Aug 2024
+      technologies:
+        - Golang
+        - Redis Protocol
+        - Networking
+      description: Developed a simplified version of Redis, implementing networking layers and command parsing.
+    - name: "Marina Art (Hackathon Winner)"
+      date: Aug 2023
+      technologies:
+        - Redux
+        - PostgreSQL
+        - Docker
+        - Git
+        - TensorFlow
+        - LLMs
+      description: Led a team in a 24-hour hackathon to develop an application that brings sketches to life using Stable Diffusion models.
+    - name: "Find Your Passion (BeachHacks 7.0)"
+      date: Jun 2023
+      technologies:
+        - ChatGPT API
+        - Node.js
+        - JavaScript
+        - HTML
+        - CSS
+        - Git
+      description: Developed a full-stack application providing personalized career guidance using the ChatGPT API.
   achievements:
-    - Led a team of 5 developers to successfully launch a machine learning-powered recommendation system
-    - Contributed to open-source projects with over 1000 stars on GitHub
-    - Published 2 research papers on AI and Natural Language Processing
+    - Led a team of 5 developers to successfully launch a machine learning-powered recommendation system.
+    - Contributed to open-source projects with over 1000 stars on GitHub.
+    - Published 2 research papers on AI and Natural Language Processing.
+    - ACM International Collegiate Programming Contest Regionals, 2017 (ACM-ICPC).
   interests:
     - Artificial Intelligence
     - Full-stack Development
     - Cloud Computing
+  publications:
+    - title: "Using Deep Reinforcement Learning and Formal Verification in Safety Critical Systems: Strategies and Challenges"
+      conference: IEEE International Conference on Software Quality, Reliability, and Security Companion
+      date: Feb 19, 2024

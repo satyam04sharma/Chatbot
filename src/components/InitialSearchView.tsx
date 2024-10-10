@@ -31,14 +31,14 @@ const InitialSearchView: React.FC<InitialSearchViewProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h1 className="text-4xl md:text-5xl font-extrabold text-center text-zinc-300 mb-8 h-20">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-zinc-300 mb-8 h-10">
         <TypeAnimation
           sequence={[
             'Satyam GPT',
             2000,
             '',
             500,
-            'Portfolio GPT',
+            'Recruiter\'s Assistant',
             2000,
             '',
             500,
@@ -47,7 +47,7 @@ const InitialSearchView: React.FC<InitialSearchViewProps> = ({
           speed={50}
           repeat={Infinity}
         />
-      </h1>
+      </h2>
       <div className="relative w-full z-20">
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-zinc-600 to-zinc-400 rounded-full opacity-20"
@@ -97,9 +97,6 @@ const InitialSearchView: React.FC<InitialSearchViewProps> = ({
         <span className="italic"> Simply ask, and watch as the future of recruitment unfolds before your eyes.</span> 
         <span className="block mt-2 text-zinc-500">🚀 Welcome to the next generation of talent discovery.</span>
       </motion.p>
-      <p className="mb-4">
-        Don&apos;t worry if you&apos;re not sure what to ask - I&apos;m here to help!
-      </p>
     </motion.div>
   )
 }

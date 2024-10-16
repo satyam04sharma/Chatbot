@@ -6,6 +6,7 @@ import path from 'path'
 import { generateQuestionSuggestions } from '../../utils/questionSuggestions'
 import { ChatMessage } from '../../types'
 import { rateLimiter, checkRateLimit } from '../../utils/rateLimit'
+import { applyMiddleware } from '../../utils/applymiddleware'
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -26,14 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (process.env.NODE_ENV === 'production') {
         console.log('Applying rate limiting');
         try {
-            await Promise.race([
-                new Promise((resolve) => rateLimiter(req, res, resolve)),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Rate limiting timed out')), 5000))
-            ]);
-        } catch (error) {
+            await applyMiddleware(req, res, rateLimiter);
+          } catch (error) {
             console.error('Rate limiting error:', error);
-            return res.status(500).json({ message: 'An error occurred while applying rate limiting.' });
-        }
+            return res.status(429).json({ message: 'Too many requests.' });
+          }
 
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
         console.log('IP Address:', ip);

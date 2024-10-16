@@ -31,7 +31,7 @@ const InitialSearchView: React.FC<InitialSearchViewProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-zinc-300 mb-8 h-10">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-zinc-300 mb-8 h-20">
         <TypeAnimation
           sequence={[
             'Satyam GPT',

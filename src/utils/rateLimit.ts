@@ -1,46 +1,51 @@
 import rateLimit from 'express-rate-limit';
 import Redis from 'ioredis';
+import RedisStore, { RedisReply } from 'rate-limit-redis';
 
-let redis: Redis | null = null;
+// Initialize Redis
+const redisClient = new Redis({
+  host: process.env.REDIS_HOST || 'redis-container',
+  port: Number(process.env.REDIS_PORT) || 6379,
+  retryStrategy: (times) => Math.min(times * 50, 2000),
+  connectTimeout: 10000,
+});
 
-console.log('Initializing Redis connection');
-redis = new Redis(process.env.REDIS_URL || 'redis://redis:6379');
-console.log('Redis connection initialized');
+// Redis event handlers
+redisClient.on('error', (err) => {
+  console.error('Redis connection error:', err);
+});
 
+redisClient.on('connect', () => {
+  console.log('Redis connected successfully.');
+});
+
+// Rate Limiter Configuration
 export const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 20, // Limit each IP to 20 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
-  keyGenerator: (req) => req.ip,
-  store: redis
-    ? {
-        incr: (key) => {
-          console.log('Incrementing rate limit for key:', key);
-          return redis!.incr(key);
-        },
-        decrement: (key) => {
-          console.log('Decrementing rate limit for key:', key);
-          return redis!.decr(key);
-        },
-        resetKey: (key) => {
-          console.log('Resetting rate limit for key:', key);
-          return redis!.del(key);
-        },
-        resetAll: () => {
-          console.log('Resetting all rate limits');
-          return Promise.resolve();
-        },
-      }
-    : undefined, // Use memory store if Redis is not available
+  keyGenerator: (req) => {
+    const key = req.ip || 'default-ip';
+    console.log(`Generating rate limit key: ${key}`);
+    return key;
+  },
+  store: new RedisStore({
+    sendCommand: (command: string, ...args: any[]) => redisClient.call(command, ...args) as Promise<RedisReply>,
+  }),
 });
-
+// Function to Check Rate Limit
 export const checkRateLimit = async (ip: string): Promise<boolean> => {
-  console.log('Checking rate limit for IP:', ip);
-  if (!redis) {
-    console.log('Redis not available, skipping rate limit check');
+  console.log(`Checking rate limit for IP: ${ip}`);
+  if (!redisClient) {
+    console.warn('Redis is not available, skipping rate limit check and falling back to in-memory store');
     return false; // Skip rate limiting if Redis is not available
   }
-  const count = await redis.get(`ratelimit:${ip}`);
-  console.log('Current rate limit count for IP:', ip, 'is:', count);
-  return count !== null && parseInt(count, 10) >= 20;
+  try {
+    const count = await redisClient.get(`rateLimit:${ip}`);
+    console.log(`Current rate limit count for IP: ${ip} is: ${count}`);
+    return count !== null && parseInt(count, 10) >= 20;
+  } catch (err) {
+    console.error('Redis get error:', err);
+    return false; // On error, do not block request
+  }
 };

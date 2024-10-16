@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { CodeProps } from 'react-markdown/lib/ast-to-react'; // Adjust the import based on your setup
 
 interface TypewriterEffectProps {
   content: string;
@@ -28,14 +29,14 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({ content, speed = 15
     ul: ({ node, ...props }) => <ul className="list-disc pl-4 mb-2" {...props} />,
     ol: ({ node, ...props }) => <ol className="list-decimal pl-4 mb-2" {...props} />,
     li: ({ node, ordered, ...props }) => (
-      <li className="ml-4 list-disc" {...props} ordered={ordered ? "true" : undefined}>
+      <li className="ml-4 list-disc" {...props}>
         {props.children}
       </li>
     ),
     a: ({ node, ...props }) => <a className="text-blue-400 hover:underline" {...props} />,
     strong: ({ node, ...props }) => <strong className="font-bold" {...props} />,
     em: ({ node, ...props }) => <em className="italic" {...props} />,
-    code: ({ node, inline, ...props }) => 
+    code: ({ node, inline, ...props }: CodeProps) => 
       inline ? (
         <code className="bg-zinc-700 px-1 rounded" {...props} />
       ) : (

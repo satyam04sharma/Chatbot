@@ -29,6 +29,7 @@
     "next": "^14.2.14",
     "next-openai-starter": "file:",
     "openai": "^4.14.2",
+    "rate-limit-redis": "^4.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.0",

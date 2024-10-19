@@ -7,6 +7,22 @@ interface TypewriterEffectProps {
   speed?: number; // Speed in milliseconds
 }
 
+/**
+ * A TypewriterEffect component for rendering a string with a typewriter effect.
+ * It takes a `content` string as a prop and renders it with a typewriter effect at a given `speed` in milliseconds.
+ * The effect is achieved by using the `setInterval` function to incrementally update the state of the component.
+ * The component also accepts a `components` object as a prop, which allows you to customize the rendering of the string.
+ * The `components` object should contain React components that correspond to the Markdown elements (e.g. `p`, `ul`, `ol`, etc.).
+ * The default `components` object is exported as `TypewriterEffectComponents`.
+ *
+ * @param {TypewriterEffectProps} props
+ * @prop {string} content - The string to render with the typewriter effect.
+ * @prop {number} [speed=15] - The speed of the typewriter effect in milliseconds.
+ * @prop {object} [components=TypewriterEffectComponents] - An object containing React components to customize the rendering of the string.
+ *
+ * @example
+ * <TypewriterEffect content="Hello, world!" />
+ */
 const TypewriterEffect: React.FC<TypewriterEffectProps> = ({ content, speed = 15 }) => { // Decrease the default speed for faster typing
   const [displayedContent, setDisplayedContent] = useState('');
 

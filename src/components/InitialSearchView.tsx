@@ -11,6 +11,23 @@ interface InitialSearchViewProps {
   suggestions: string[];
 }
 
+/**
+ * InitialSearchView
+ * 
+ * The initial search view component. This component displays a type animation
+ * of the assistant's name and a chat input field with suggestions. It also
+ * includes a section with some example questions you can ask Satyam GPT. When
+ * you click on one of the example questions, it will populate the chat input
+ * field with the question and trigger a search.
+ * 
+ * @param {string} searchQuery - The current search query.
+ * @param {(query: string) => void} setSearchQuery - A function to update the
+ *   search query.
+ * @param {() => void} handleSearch - A function to trigger a search.
+ * @param {boolean} isLoading - Whether the search is currently loading.
+ * @param {string[]} suggestions - An array of search suggestions.
+ * @returns The JSX for the initial search view component.
+ */
 const InitialSearchView: React.FC<InitialSearchViewProps> = ({
   searchQuery,
   setSearchQuery,

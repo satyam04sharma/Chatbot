@@ -1,10 +1,11 @@
-import React from 'react'
-import { motion } from "framer-motion"
-import { X } from 'lucide-react'
-import { ChatMessage as ChatMessageType } from '../../types'
-import ChatMessage from './ChatMessage'
-import ChatInput from './ChatInput'
-import Loader from '../ui/Loader'
+import React from 'react';
+import { motion } from "framer-motion";
+import { X } from 'lucide-react';
+import { ChatMessage as ChatMessageType } from '../../types';
+import ChatMessage from './ChatMessage';
+import ChatInput from './ChatInput';
+import Loader from '../ui/Loader';
+import SuggestedQuestions from './SuggestedQuestions'; // Import the new component
 
 interface ChatViewProps {
   chatMessages: ChatMessageType[];
@@ -17,6 +18,33 @@ interface ChatViewProps {
   resetToInitialScreen: () => void;
 }
 
+/**
+ * ChatView component
+ * 
+ * This component renders the chat view with the given chat messages, 
+ * loading state, and search query. It also handles the search functionality 
+ * and resetting the chat to the initial screen.
+ * 
+ * The chat view is a motion.div that animates from 0 opacity to 1 opacity when 
+ * mounted. It contains a button to close the chat and return to the initial 
+ * screen, a div with a flex-grow class to take up the rest of the available space, 
+ * and a sticky footer with a chat input and suggested questions.
+ * 
+ * The chat messages are rendered as a list of ChatMessage components inside the 
+ * flex-grow div. If the chat is loading, a loader is rendered instead.
+ * 
+ * The suggested questions are rendered as a SuggestedQuestions component below the
+ * chat messages.
+ * 
+ * @param {ChatMessageType[]} chatMessages - The chat messages to render
+ * @param {boolean} isLoading - Whether the chat is currently loading
+ * @param {React.RefObject<HTMLDivElement>} chatContainerRef - The ref to the chat container
+ * @param {string} searchQuery - The current search query
+ * @param {(query: string) => void} setSearchQuery - The function to set the search query
+ * @param {() => void} handleSearch - The function to handle the search
+ * @param {string[]} suggestions - The suggested questions
+ * @param {() => void} resetToInitialScreen - The function to reset the chat to the initial screen
+ */
 const ChatView: React.FC<ChatViewProps> = ({ 
   chatMessages, 
   isLoading, 
@@ -58,23 +86,10 @@ const ChatView: React.FC<ChatViewProps> = ({
         )}
       </div>
       <div className="mt-auto">
-        {!isLoading && suggestions.length > 0 && (
-          <div className="mb-4 px-4">
-            <p className="text-zinc-400 mb-2 text-sm">Suggested Questions:</p>
-            <div className="flex flex-col space-y-2">
-              {suggestions.map((suggestion, index) => (
-                <button
-                  key={index}
-                  className="px-3 py-1 bg-zinc-700 hover:bg-zinc-600 text-zinc-200 rounded-lg transition-colors duration-200 text-sm"
-                  onClick={() => handleSearch(suggestion)}
-                  aria-label={`Ask: ${suggestion}`}
-                >
-                  {suggestion}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+        <SuggestedQuestions 
+          suggestions={suggestions} 
+          handleSearch={handleSearch} 
+        />
         <div className="sticky bottom-0 z-20 w-full bg-gray-900 py-4">
           <div className="max-w-3xl mx-auto px-4">
             <ChatInput 
@@ -82,13 +97,13 @@ const ChatView: React.FC<ChatViewProps> = ({
               setSearchQuery={setSearchQuery} 
               handleSearch={() => handleSearch()}
               isLoading={isLoading}
-              suggestions={[]}
+              suggestions={[]} // No need to pass suggestions here
             />
           </div>
         </div>
       </div>
     </div>
   </motion.div>
-)
+);
 
-export default ChatView
+export default ChatView;

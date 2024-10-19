@@ -8,6 +8,14 @@ import InitialSearchView from './InitialSearchView'
 import ChatView from './chat/ChatView'
 import { toast } from 'react-toastify';
 
+/**
+ * The EnhancedFuturisticPortfolio component is the main entry point for the
+ * Futuristic Portfolio application. It handles the initial search view and
+ * the chat view. It also handles the logic for sending messages to the OpenAI
+ * API and displaying the responses.
+ *
+ * @returns The JSX for the EnhancedFuturisticPortfolio component.
+ */
 export default function EnhancedFuturisticPortfolio() {
   const [searchQuery, setSearchQuery] = useState("")
   const [chatMessages, setChatMessages] = useState<ChatMessageType[]>([])

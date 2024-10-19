@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; // Added useState for managing input validity
 import { Search, Send } from "lucide-react";
+import DOMPurify from 'dompurify'; // Import DOMPurify
 
 interface ChatInputProps {
   searchQuery: string;
@@ -9,12 +10,46 @@ interface ChatInputProps {
   suggestions: string[];
 }
 
+/**
+ * A ChatInput component for the chat interface. It handles user input and shows a warning message if the input exceeds 300 words.
+ *
+ * @param {string} searchQuery The current search query input by the user.
+ * @param {function} setSearchQuery A function to update the search query state.
+ * @param {function} handleSearch A function to handle the search query.
+ * @param {boolean} isLoading A boolean indicating if the component is currently loading.
+ * @param {string[]} suggestions An array of suggested search queries.
+ *
+ * @returns A JSX element representing the chat input component.
+ */
 const ChatInput: React.FC<ChatInputProps> = ({ searchQuery, setSearchQuery, handleSearch, isLoading, suggestions }) => {
     const [isInvalid, setIsInvalid] = useState(false); // State to track input validity
     const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
 
     const wordCount = searchQuery.trim().split(/\s+/).length; // Count words
 
+    /**
+     * Sanitizes a given input string to prevent XSS attacks and
+     * strip out dangerous protocols from URLs.
+     *
+     * @param {string} input The input string to be sanitized.
+     *
+     * @returns {string} The sanitized input string.
+     */
+    const sanitizeInput = (input: string) => {
+        // Sanitize input to prevent XSS
+        const sanitizedInput = DOMPurify.sanitize(input);
+        // Strip dangerous protocols from URLs
+        return sanitizedInput.replace(/(javascript:|data:|vbscript:)/gi, '');
+    };
+
+    /**
+     * Handles the keydown event of the chat input. If the Enter key is pressed,
+     * it checks if the input is valid and not empty. If the input word count
+     * exceeds 300, it shows a warning message to the user. If the input is valid,
+     * it hides the warning message and fires the handleSearch function.
+     *
+     * @param {React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>} e The event object.
+     */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         if (e.key === 'Enter' && searchQuery.trim() && !isLoading) {
             if (wordCount > 300) {
@@ -28,8 +63,17 @@ const ChatInput: React.FC<ChatInputProps> = ({ searchQuery, setSearchQuery, hand
         }
     };
 
+    /**
+     * Handles the change event of the chat input. It sanitizes the input to prevent XSS
+     * and strips out dangerous protocols from URLs. It also updates the invalid state and
+     * shows or hides the popup message based on the word count.
+     *
+     * @param {React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>} e The event object.
+     */
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setSearchQuery(e.target.value);
+        const userInput = e.target.value;
+        const cleanedInput = sanitizeInput(userInput); // Sanitize user input
+        setSearchQuery(cleanedInput);
         if (wordCount > 300) {
             setIsInvalid(true); // Update invalid state based on word count
             setShowPopup(true); // Show popup message

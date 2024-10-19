@@ -19,7 +19,6 @@ redisClient.on('connect', () => {
   console.log('Redis connected successfully.');
 });
 
-// Rate Limiter Configuration
 export const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 20, // Limit each IP to 20 requests per windowMs
@@ -33,7 +32,14 @@ export const rateLimiter = rateLimit({
     sendCommand: (command: string, ...args: any[]) => redisClient.call(command, ...args) as Promise<RedisReply>,
   }),
 });
-// Function to Check Rate Limit
+
+
+/**
+ * Checks if the given IP has exceeded the rate limit of 20 requests per 15 minute window.
+ * If Redis is not available, this function will return false and not block the request.
+ * @param {string} ip The IP address to check.
+ * @returns {Promise<boolean>} true if the rate limit has been exceeded, false otherwise.
+ */
 export const checkRateLimit = async (ip: string): Promise<boolean> => {
   console.log(`Checking rate limit for IP: ${ip}`);
   if (!redisClient) {

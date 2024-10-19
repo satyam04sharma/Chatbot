@@ -6,6 +6,16 @@ interface ChatMessageProps {
   content: string;
 }
 
+/**
+ * A component to render a chat message in the chat window.
+ * If the message is from the user, it will be rendered directly.
+ * If the message is from the bot, it will be rendered with a typewriter effect.
+ *
+ * @param {ChatMessageProps} props
+ * @prop {string} type - The type of the message, either 'user' or 'bot'.
+ * @prop {string} content - The content of the message.
+ * @returns {React.ReactElement} A JSX element representing the chat message.
+ */
 const ChatMessage: React.FC<ChatMessageProps> = ({ type, content }) => (
   <div className={`flex ${type === 'user' ? 'justify-end' : 'justify-start'}`}>
     <div
